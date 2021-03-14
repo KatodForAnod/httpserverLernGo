@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory</title>
+</head>
+<body>
+<header>
+    <h1>Inventory</h1>
+</header>
+<table>
+    <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    </thead>
+    {{range . }}
+    <tr>
+        <td>{{.ID}}</td>
+        <td>{{.NameOfInventory}}</td>
+        <td>{{.DescriptionOfInventory}}</td>
+        <td>
+            <a href='/GET/delete/inventory/{{.NameOfInventory}}'>Удалить</a>
+        </td>
+    </tr>
+    {{end}}
+</table>
+</body>
+</html>

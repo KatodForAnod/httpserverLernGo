@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<header>
+    <h1>Users</h1>
+    <!--<h3><a href='/createCompany'>Create</a></h3>-->
+</header>
+
+<table>
+    <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th></th>
+    </thead>
+    {{range . }}
+    <tr>
+        <td>{{.UserID}}</td>
+        <td>{{.UserName}}</td>
+        <td>
+            <a href='/GET/delete/user/{{.UserName}}'>Удалить</a>
+        </td>
+    </tr>
+    {{end}}
+</table>
+</body>
+</html>
