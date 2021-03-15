@@ -1,4 +1,4 @@
-package handler
+package service
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ import (
 
 // GetUsers - return users
 func GetUsers(w http.ResponseWriter, r *http.Request) {
-	url := "http://127.0.0.1:8181/GET/users"
+	url := "http://127.0.0.1:8181/users"
 	var netClient = http.Client{
 		Timeout: time.Second * 10,
 	}
@@ -56,7 +56,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		http.ServeFile(w, r, "tmpl//createUser.html")
 	case "POST":
-		url := "http://127.0.0.1:8181/POST/create/user"
+		url := "http://127.0.0.1:8181/user"
 		var netClient = http.Client{
 			Timeout: time.Second * 10,
 		}
@@ -80,7 +80,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Server error", 500)
 			return
 		}
-		http.Redirect(w, r, "/GET/users", http.StatusMovedPermanently)
+		http.Redirect(w, r, "/users", http.StatusMovedPermanently)
 	}
 }
 
@@ -88,7 +88,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userName := vars["name"]
-	url := "http://127.0.0.1:8181/GET/delete/user/" + userName
+	url := "http://127.0.0.1:8181/user/" + userName
 	var netClient = http.Client{
 		Timeout: time.Second * 10,
 	}
@@ -106,5 +106,5 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Server error", 500)
 		return
 	}
-	http.Redirect(w, r, "/GET/users", http.StatusMovedPermanently)
+	http.Redirect(w, r, "/users", http.StatusMovedPermanently)
 }

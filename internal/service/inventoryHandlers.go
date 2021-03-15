@@ -1,4 +1,4 @@
-package handler
+package service
 
 import (
 	"bytes"
@@ -14,7 +14,7 @@ import (
 
 // GetInventory - get all inventory
 func GetInventory(w http.ResponseWriter, r *http.Request) {
-	url := "http://127.0.0.1:8181/GET/inventory"
+	url := "http://127.0.0.1:8181/inventory"
 	var netClient = http.Client{
 		Timeout: time.Second * 10,
 	}
@@ -57,7 +57,7 @@ func CreateInventory(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		http.ServeFile(w, r, "tmpl//createInventory.html")
 	case "POST":
-		url := "http://127.0.0.1:8181/POST/create/inventory"
+		url := "http://127.0.0.1:8181/inventory"
 		var netClient = http.Client{
 			Timeout: time.Second * 10,
 		}
@@ -83,7 +83,7 @@ func CreateInventory(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Server error", 500)
 			return
 		}
-		http.Redirect(w, r, "/GET/inventory", http.StatusMovedPermanently)
+		http.Redirect(w, r, "/inventories", http.StatusMovedPermanently)
 	}
 }
 
@@ -92,7 +92,7 @@ func DeleteInventory(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("hu")
 	vars := mux.Vars(r)
 	invName := vars["name"]
-	url := "http://127.0.0.1:8181/GET/delete/inventory/" + invName
+	url := "http://127.0.0.1:8181/inventory/" + invName
 	var netClient = http.Client{
 		Timeout: time.Second * 10,
 	}
@@ -110,7 +110,7 @@ func DeleteInventory(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Server error", 500)
 		return
 	}
-	http.Redirect(w, r, "/GET/inventory", http.StatusMovedPermanently)
+	http.Redirect(w, r, "/inventory", http.StatusMovedPermanently)
 }
 
 // CreateAssign - create assign
@@ -119,7 +119,7 @@ func CreateAssign(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		http.ServeFile(w, r, "tmpl//createAssign.html")
 	case "POST":
-		url := "http://127.0.0.1:8181/POST/create/assign"
+		url := "http://127.0.0.1:8181/assign"
 		var netClient = http.Client{
 			Timeout: time.Second * 10,
 		}
@@ -148,6 +148,6 @@ func CreateAssign(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Server error", 500)
 			return
 		}
-		http.Redirect(w, r, "/GET/inventory", http.StatusMovedPermanently)
+		http.Redirect(w, r, "/inventories", http.StatusMovedPermanently)
 	}
 }

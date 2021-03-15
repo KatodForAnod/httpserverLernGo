@@ -2,25 +2,25 @@ package main
 
 import (
 	"github.com/gorilla/mux"
-	"httpserver/internal/handler"
+	"httpserver/internal/service"
 	"log"
 	"net/http"
 )
 
 func main() {
 	mux := mux.NewRouter()
-	mux.HandleFunc("/GET/users", handler.GetUsers)
-	mux.HandleFunc("/POST/create/user", handler.CreateUser)
-	mux.HandleFunc("/GET/delete/user/{name:[a-zA-z]+}", handler.DeleteUser)
+	mux.HandleFunc("/users", service.GetUsers)
+	mux.HandleFunc("/user", service.CreateUser)
+	mux.HandleFunc("/user/{name:[a-zA-z]+}", service.DeleteUser)
 
-	mux.HandleFunc("/GET/inventory", handler.GetInventory)
-	mux.HandleFunc("/POST/create/inventory", handler.CreateInventory)
-	mux.HandleFunc("/GET/delete/inventory/{name:[a-zA-z]+}", handler.DeleteInventory)
+	mux.HandleFunc("/inventories", service.GetInventory)
+	mux.HandleFunc("/inventory", service.CreateInventory)
+	mux.HandleFunc("/inventory/{name:[a-zA-z]+}", service.DeleteInventory)
 
-	mux.HandleFunc("/POST/create/assign", handler.CreateAssign)
+	mux.HandleFunc("/assign", service.CreateAssign)
 	http.Handle("/", mux)
 
-	log.Println("Запуск веб-сервера на http://127.0.0.1:8080/POST/create/assign")
+	log.Println("Запуск веб-сервера на http://127.0.0.1:8080/users")
 	errServe := http.ListenAndServe(":8080", nil)
 	log.Fatal(errServe)
 }

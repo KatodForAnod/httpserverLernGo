@@ -7,7 +7,7 @@
 <body>
 <header>
     <h1>Users</h1>
-    <!--<h3><a href='/createCompany'>Create</a></h3>-->
+    <h3><a href='/user'>Create</a></h3>
 </header>
 
 <table>
@@ -21,7 +21,7 @@
         <td>{{.UserID}}</td>
         <td>{{.UserName}}</td>
         <td>
-            <a href='/GET/delete/user/{{.UserName}}'>Удалить</a>
+            <a href='/user/{{.UserName}}'>Удалить</a>
         </td>
     </tr>
     {{end}}
